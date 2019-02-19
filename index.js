@@ -8,8 +8,6 @@ app.get("*", (req, res) => {
   for (var i = 2; i <= n; i++) {
 	ans = ans * i;
   }
-  console.log(ans)
-  res.send(toString(ans))
 });
 
 app.listen(port, function(){
