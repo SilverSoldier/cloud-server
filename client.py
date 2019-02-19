@@ -2,9 +2,9 @@ import requests
 import time
 import sys
 import random
-from multiprocessing import Process, Value
+from multiprocessing import Process, Value, Pool
 
-# url = 'http://34.95.72.238:8080/'
+# url = 'http://35.185.208.66:3000/'
 url = 'http://localhost:3000/'
 
 N_REQUESTS = int(sys.argv[1])
@@ -19,14 +19,13 @@ def send_request():
 
 threads = []
 
+pool = Pool()
 start = time.time()
 for i in range(N_REQUESTS):
-    t = Process(target=send_request)
-    threads.append(t)
-    t.start()
+    pool.apply_async(send_request)
 
-for thread in threads:
-    thread.join()
+pool.close()
+pool.join()
 
 end = time.time()
 
